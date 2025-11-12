@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "439541729263",
+    "firebase_url": "https://primeiro-app-firebase-59976-default-rtdb.firebaseio.com",
+    "project_id": "primeiro-app-firebase-59976",
+    "storage_bucket": "primeiro-app-firebase-59976.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439541729263:android:a43be11326c99dd860981a",
+        "android_client_info": {
+          "package_name": "com.app.filmes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKgHZZDEOQwGvuWzULZ2qbYmcDFeevI94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
