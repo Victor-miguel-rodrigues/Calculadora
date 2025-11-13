@@ -35,6 +35,7 @@ class _nameState extends State<Myapp> {
                   Text("Numero",style: TextStyle(fontSize: 40),)
                 ],
             ),
+            
              Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
