@@ -16,20 +16,24 @@ class Myapp extends StatefulWidget {
 }
 
 class _nameState extends State<Myapp> {
-  String numero = "numero";
+  String numero = "0";
   String novoNumm = " ";
   bool caseTocado = false;
   String operacao = " ";
-  int primeiroNumero = 0;
-  int segundoNumero = 0;
+  double primeiroNumero = 0.0;
 
   void calcular(String tecla) {
     switch (tecla) {
       case "0":
         {
           setState(() {
-            int novomunero = int.parse(novoNumm + tecla);
-            numero = novomunero.toString();
+            if(numero.isNotEmpty && numero != "0"){
+              numero += tecla;
+            }else{
+              int novomunero = int.parse(tecla);
+              numero = novomunero.toString();
+            }
+            
           });
         }
       case "1":
@@ -41,19 +45,19 @@ class _nameState extends State<Myapp> {
       case "7":
       case "8":
       case "9":
-        {
-          setState(() {
-            novoNumm += tecla;
-            numero = novoNumm;
-            primeiroNumero = int.parse(tecla);
-            segundoNumero = int.parse(tecla);
-          });
-        }
       case ",":
         {
           setState(() {
-            novoNumm += ".";
-            numero = novoNumm;
+            numero += tecla;
+
+            numero = numero.replaceAll(",", ".");
+            if(numero.contains(".")){
+             
+            }else{
+              int numInt = int.parse(numero);
+              numero = numInt.toString();
+            }
+            numero = numero.replaceAll(".", ",");
           });
         }
       case "<X":
@@ -69,39 +73,66 @@ class _nameState extends State<Myapp> {
       case "AC":
         {
           setState(() {
-            numero = "numero";
-            novoNumm = "";
+            numero = "";
+            
           });
           break;
         }
-      case "=":
-        {
-          setState(() {
-            if (operacao == "+") {
-              var resultado =
-                  int.parse(primeiroNumero.toString()) + int.parse(segundoNumero.toString());
-              numero = resultado.toString();
+      case "=":{
+          double resultado = 0.0;
+          if(operacao == "+"){
+              resultado = primeiroNumero + double.parse(numero);
+          }else if(operacao == "-"){
+              resultado = primeiroNumero - double.parse(numero);
+          }else if(operacao == "x"){
+              resultado = primeiroNumero * double.parse(numero);
+          }else if(operacao == "/"){
+            if(double.parse(numero) *1 == 0){
+              print("Error: Divisão por zero");
+              return;
+            }else{
+               resultado = primeiroNumero / double.parse(numero);
             }
+          }
+         
+          String resultadoPartes = resultado.toString();
+
+          List<String> partes = resultadoPartes.split(".");
+         
+          if(int.parse(partes[0]) *1 == 0){
+            resultado = double.parse(partes[0]);
+          }
+          setState(() {
+             numero = resultado.toString();
+             numero = numero.replaceAll(".", ",");
           });
+
           break;
         }
-      case "+":
-        {
-          setState(() {
-            operacao = "+";
-            novoNumm += tecla;
-            numero = novoNumm;
-          });
+    case "+":{
+        operacao = "+";
+        primeiroNumero = double.parse(numero.replaceAll(",", "."));
+        numero = "0";
+        break;
         }
-      case "/":
-        {
-          setState(() {
-            operacao = "/";
-            novoNumm += tecla;
-            numero = novoNumm;
-          });
-          break;
-        }
+    case "-" :{
+      operacao = "-";
+      primeiroNumero = double.parse(numero.replaceAll(",", "."));
+      numero = "0";
+    }
+
+    case "/" :{
+      operacao = "/";
+      primeiroNumero = double.parse(numero.replaceAll(",", "."));
+      numero = "0";
+    }
+    case "x" :{
+      operacao = "x";
+      primeiroNumero = double.parse(numero.replaceAll(",", "."));
+      numero = "0";
+    }
+
+
     }
   }
 
